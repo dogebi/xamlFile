@@ -1,0 +1,262 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="DataTableToSQLite" this:DataTableToSQLite.Int_CommitUnit="100" this:DataTableToSQLite.Bol_Trace="False" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:SQLite;assembly=SQLiteActivities" xmlns:s1="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sds="clr-namespace:System.Data.SQLite;assembly=System.Data.SQLite" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="DT_Source" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="Str_SqlitePath" Type="InArgument(x:String)" />
+    <x:Property Name="Bol_DropTable" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Int_CommitUnit" Type="InArgument(x:Int32)" />
+    <x:Property Name="Bol_Trace" Type="InArgument(x:Boolean)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>743,1542</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="40">
+      <x:String>System.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Data.SQLite</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Data.Common</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="16">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.SQLite</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="데이터테이블을 SQLite에 테이블 생성 후 데이터 입력 처리&#xA;: 테이블 명 - 데이터테이블명 이용&#xA;: 테이블 삭제 옵션이 참일 경우 삭제 후 생성&#xA;: 테이블 삭제 옵션이 거짓 일경우 동일이름의 테이블이 있으면 Exception 발생&#xA;1. 테이블 생성&#xA;CREATE TABLE &quot;TableName&quot; (&#xA; &quot;ColumnName1&quot; Type,&#xA; &quot;ColumnName2&quot; Type,&#xA;);&#xA;Type : Integer, Text(기본)&#xA;&#xA;2. DataTable To New Table" sap:VirtualizedContainerService.HintSize="480,1377" sap2010:WorkflowViewState.IdRef="Sequence_85">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="Str_Query" />
+      <Variable x:TypeArguments="x:Int32" Name="Int_Index" />
+      <Variable x:TypeArguments="sds:SQLiteConnection" Name="SqliteDBConnection" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <s:CreateConnection DatabaseFullPath="[Str_SqlitePath]" DisplayName="Create connection" sap:VirtualizedContainerService.HintSize="438,22" sap2010:WorkflowViewState.IdRef="CreateConnection_1" Output="[SqliteDBConnection]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,1031" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,804" sap2010:WorkflowViewState.IdRef="Sequence_93">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign-Table 생성용 쿼리" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="Assign_50">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Str_Query]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">[String.Join(",",DT_Source.Columns.	Cast(Of DataColumn).	
+	Select(
+		Function(c As DataColumn,i As Int32) "'" + c.ColumnName + "'" + If(c.DataType.Name.StartsWith("Int")," Integer"," Text")
+	).ToList)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Assign-테이블 생성 쿼리(완성)" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_52">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Str_Query]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[String.Format("CREATE TABLE {0} ({1})", Dt_Source.TableName, Str_Query)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <If Condition="[Bol_DropTable]" DisplayName="If-테이블 삭제 여부 체크" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch.Try>
+                  <s:ExecuteNonQuery DatabaseFullPath="{x:Null}" Connection="[SqliteDBConnection]" DisplayName="Execute query-테이블 삭제" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_2" SQLCommand="[&quot;drop table &quot; + DT_Source.TableName]" />
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s1:Exception" sap:VirtualizedContainerService.HintSize="400,130" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s1:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+                      </ActivityAction.Argument>
+                      <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="231,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Delete Existed Table Exception :: &quot; + exception.Message]" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+            </If.Then>
+          </If>
+          <s:ExecuteNonQuery DatabaseFullPath="{x:Null}" Connection="[SqliteDBConnection]" DisplayName="Execute query-테이블 생성" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_1" SQLCommand="[Str_Query]" />
+          <Assign DisplayName="Assign-Query  초기화" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_55">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Str_Query]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="604,143" sap2010:WorkflowViewState.IdRef="Sequence_94">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="[Int_Index]" DisplayName="For Each-대용량 처리로 교체" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[DT_Source.Rows]">
+                  <ui:ForEach.Body>
+                    <ActivityAction x:TypeArguments="sd:DataRow">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,807" sap2010:WorkflowViewState.IdRef="Sequence_86">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="484,64" sap2010:WorkflowViewState.IdRef="Assign_53">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Str_Query]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String" xml:space="preserve">[Str_Query + "insert into " + DT_Source.TableName + " values(" +
+String.Join(",",row.ItemArray.
+	Select(
+		Function(r As Object,i As Int32) If(DT_Source.Columns(i).DataType.Name.StartsWith("Int"),r,"'"+r.ToString+"'")
+	).ToList) +
+ ");"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <If Condition="[Bol_Trace and ((Int_Index+1) mod Int_CommitUnit = 0 Or Int_Index = DT_Source.Rows.Count)]" DisplayName="If-Trace" sap:VirtualizedContainerService.HintSize="484,209" sap2010:WorkflowViewState.IdRef="If_3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="231,61" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[&quot;Trace :: Record Position - &quot; + Int_Index.ToString]" />
+                          </If.Then>
+                        </If>
+                        <If Condition="[(Int_Index+1) mod Int_CommitUnit = 0 Or Int_Index = DT_Source.Rows.Count]" DisplayName="If-묶음단위 처리" sap:VirtualizedContainerService.HintSize="484,362" sap2010:WorkflowViewState.IdRef="If_2">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_92">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <s:ExecuteNonQuery DatabaseFullPath="{x:Null}" Connection="[SqliteDBConnection]" DisplayName="Execute non query" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_3" SQLCommand="[&quot;BEGIN;&quot; + vbNewLine + Str_Query + vbNewLine + &quot;COMMIT;&quot;]" />
+                              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_54">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[Str_Query]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </If.Then>
+                        </If>
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:ForEach.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:ForEach>
+              </Sequence>
+            </ui:CommentOut.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CommentOut>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim colLst As List(Of String) = DT.Columns.Cast(Of DataColumn).Select(&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Function(c As DataColumn) c.ColumnName&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;).ToList()&#xD;&#xA;Dim tableName As String= DT.TableName&#xD;&#xA;&#xD;&#xA;Using transaction As SQLiteTransaction = connection.BeginTransaction&#xD;&#xA;&#x9;Dim command As SQLiteCommand = connection.CreateCommand&#xD;&#xA;&#x9;command.CommandText = String.Format(&quot;Insert into {0} values({1})&quot;,tableName,&#x9;&quot;$&quot;+String.Join(&quot;,$&quot;,colLst))&#xD;&#xA;&#x9;'SQLParameter 생성&#xD;&#xA;&#x9;For Each c As String In colLst&#xD;&#xA;&#x9;&#x9;Dim param As SQLiteParameter = command.CreateParameter()&#xD;&#xA;&#x9;&#x9;param.ParameterName = &quot;$&quot; + c&#xD;&#xA;&#x9;&#x9;command.Parameters.Add(param)&#xD;&#xA;&#x9;Next c&#xD;&#xA;&#x9;Dim Int_Trace As Int32 = 0&#xD;&#xA;&#x9;For Each row As DataRow In DT.Rows&#xD;&#xA;&#x9;&#x9;'파라미터 세팅&#xD;&#xA;&#x9;&#x9;For i As Int32 = 0 To row.ItemArray.Count - 1&#xD;&#xA;&#x9;&#x9;&#x9;command.Parameters(i).Value = if(DT.Columns(i).DataType.Name.Equals(&quot;Object&quot;), row(i).ToString, row(i))&#xD;&#xA;&#x9;&#x9;&#x9;'Console.WriteLine(i.ToString + &quot; row :: &quot;+DT.Columns(i).ColumnName+&quot;,&quot;+DT.Columns(i).DataType.Name+&quot;,&quot;+row(i).ToString+&quot;,&quot;+command.Parameters(i).Value.ToString)&#xD;&#xA;&#x9;&#x9;Next i&#xD;&#xA;&#x9;&#x9;'Insert Query&#xD;&#xA;&#x9;&#x9;command.ExecuteNonQuery()&#xD;&#xA;&#x9;&#x9;If trace And Int_Trace Mod unit =0&#xD;&#xA;&#x9;&#x9;&#x9;Console.WriteLine(&quot;Trace :: &quot; + Int_Trace.ToString)&#xD;&#xA;&#x9;&#x9;&#x9;Console.WriteLine(String.Join(&quot;,&quot;,row.ItemArray))&#xD;&#xA;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;Int_Trace = Int_Trace + 1&#xD;&#xA;&#x9;Next row&#xD;&#xA;&#x9;'Batch Commit&#xD;&#xA;&#x9;transaction.Commit&#xD;&#xA;End Using" DisplayName="Invoke code-대용량 데이터 입력 처리" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="sds:SQLiteConnection" x:Key="connection">[SqliteDBConnection]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="DT">[DT_Source]</InArgument>
+              <InArgument x:TypeArguments="x:Int32" x:Key="unit">[Int_CommitUnit]</InArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="trace">[Bol_Trace]</InArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s1:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s1:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="231,61" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="[&quot;SQLite Exception :: &quot; + exception.Message]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <s:CloseConnection Connection="[SqliteDBConnection]" DisplayName="Close connection" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CloseConnection_1" />
+      </TryCatch.Finally>
+    </TryCatch>
+  </Sequence>
+</Activity>

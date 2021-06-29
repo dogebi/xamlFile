@@ -1,0 +1,205 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/vmware" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uvc="clr-namespace:UiPath.VMware.Contracts;assembly=UiPath.VMware" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_NewVMNameFullPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_TemplateNameFullPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_DatestoreName" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>895,1086</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="24">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.VMware</x:String>
+      <x:String>UiPath.VMware.Contracts</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="18">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.VMware</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="476,921" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="Username" />
+      <Variable x:TypeArguments="ss:SecureString" Name="Password" />
+      <Variable x:TypeArguments="p:VirtualMachineInfo[]" Name="VMs" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="dCloudvCenter_Credential" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[Username]" />
+    <p:VMwareScope DisplayName="VMware Scope" sap:VirtualizedContainerService.HintSize="434,768" sap2010:WorkflowViewState.IdRef="VMwareScope_1" Password="[Password]" ServerAddress="vc1.dcloud.cisco.com" Username="[Username]">
+      <p:VMwareScope.Body>
+        <ActivityAction x:TypeArguments="p:VMwareService">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="p:VMwareService" Name="VMwareScopeConnectionName" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="실행" sap:VirtualizedContainerService.HintSize="304.5,682" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="uvc:Host[]" Name="Hosts" />
+              <Variable x:TypeArguments="p:VirtualMachineInfo" Name="CreatedVM" />
+              <Variable x:TypeArguments="scg:Dictionary(x:String, scg1:HashSet(p:VirtualMachineInfo))" Name="VMPerHost">
+                <Variable.Default>
+                  <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, scg1:HashSet(p:VirtualMachineInfo))" ExpressionText="new Dictionary( of string, HashSet( of VirtualMachineInfo))" />
+                </Variable.Default>
+              </Variable>
+              <Variable x:TypeArguments="scg:KeyValuePair(x:String, scg1:HashSet(p:VirtualMachineInfo))" Name="FirstItem" />
+              <Variable x:TypeArguments="x:String" Name="DCName" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap2010:Annotation.AnnotationText="데이터센터 정보 추출 " sap:VirtualizedContainerService.HintSize="262.5,91" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[DCName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[in_NewVMNameFullPath.Split("/".ToCharArray).First]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <p:GetVMList TagCategory="{x:Null}" TagName="{x:Null}" sap2010:Annotation.AnnotationText="호스트별 VM 배치 정보를 조회 후 가장 작은 호스트에 새로운 VM 배포 " DisplayName="Get VM List" Folder="dCloud-DC" sap:VirtualizedContainerService.HintSize="262.5,82" sap2010:WorkflowViewState.IdRef="GetVMList_1" IncludeSubfolders="True" PowerState="All" Timeout="300" VMList="[VMs]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </p:GetVMList>
+            <ui:ForEach x:TypeArguments="p:VirtualMachineInfo" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="262.5,52" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[VMs]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="p:VirtualMachineInfo">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="p:VirtualMachineInfo" Name="vm" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="본문" sap:VirtualizedContainerService.HintSize="591.5,695" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="variable1" />
+                      <Variable x:TypeArguments="x:Boolean" Name="HostExists" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="549.5,93" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[vm.Id + &quot; on &quot; + vm.Host + &quot; with &quot; + vm.PowerState.ToString]" />
+                    <ExistsInCollection x:TypeArguments="x:String" Collection="[VMPerHost.Keys]" DisplayName="Exists In Collection" sap:VirtualizedContainerService.HintSize="549.5,22" sap2010:WorkflowViewState.IdRef="ExistsInCollection`1_1" Item="[vm.Host]" Result="[HostExists]" />
+                    <If Condition="[HostExists]" sap:VirtualizedContainerService.HintSize="549.5,408" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If.Then>
+                        <AddToCollection x:TypeArguments="p:VirtualMachineInfo" sap2010:Annotation.AnnotationText="호스트별 VirtualMachineInfo 저장 " Collection="[VMPerHost( vm.Host)]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[vm]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </AddToCollection>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap:VirtualizedContainerService.HintSize="304.5,258" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="262.5,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="scg1:HashSet(p:VirtualMachineInfo)">[VMPerHost( vm.Host)]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="scg1:HashSet(p:VirtualMachineInfo)">[new HashSet( of VirtualMachineInfo)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <AddToCollection x:TypeArguments="p:VirtualMachineInfo" sap2010:Annotation.AnnotationText="호스트별 VirtualMachineInfo 저장 " Collection="[VMPerHost( vm.Host)]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="262.5,66" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[vm]">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </AddToCollection>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
+            <Assign sap2010:Annotation.AnnotationText="VM 숫자가 가장 적은 호스트 선택 " sap:VirtualizedContainerService.HintSize="262.5,91" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="scg:KeyValuePair(x:String, scg1:HashSet(p:VirtualMachineInfo))">[FirstItem]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="scg:KeyValuePair(x:String, scg1:HashSet(p:VirtualMachineInfo))">[VMPerHost.AsEnumerable().OrderBy( Function(p) p.Value.Count).First]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <p:CreateVMFromTemplate CustomizationSpecification="{x:Null}" sap2010:Annotation.AnnotationText="데이터스토어, 호스트이름, 템플릿경로(Full Path)를 가지고 VM을 생성, 생된되는 VM에 대해서는 전체 경로(데이터센터/폴더 포함)을 줘야 함" Datastore="[in_DatestoreName]" DiskStorage="SameFormatAsSource" DisplayName="Create VM From Template" sap:VirtualizedContainerService.HintSize="262.5,114" Host="[FirstItem.Key]" sap2010:WorkflowViewState.IdRef="CreateVMFromTemplate_1" PowerOnAfterCreation="False" SourceTemplate="[in_TemplateNameFullPath]" Timeout="1800" VirtualMachineDescription="Created by UiPath Robot" VirtualMachineInfo="[CreatedVM]" VirtualMachineName="[in_NewVMNameFullPath]" WaitForCompletion="False">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </p:CreateVMFromTemplate>
+          </Sequence>
+        </ActivityAction>
+      </p:VMwareScope.Body>
+    </p:VMwareScope>
+  </Sequence>
+</Activity>

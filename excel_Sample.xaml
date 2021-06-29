@@ -1,0 +1,204 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Sample" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="908.666666666667,2305.33333333333" sap2010:WorkflowViewState.IdRef="Sample_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Sample" sap:VirtualizedContainerService.HintSize="918.666666666667,1993.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="idx" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_Test" />
+      <Variable x:TypeArguments="x:String" Name="Str_Test" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:BuildDataTable DataTable="[DT_Test]" DisplayName="Build Sample Data" sap:VirtualizedContainerService.HintSize="876.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;idx&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;이름&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;KEY_x0020_값&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;데이터&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;idx&gt;1&lt;/idx&gt;&#xD;&#xA;    &lt;이름&gt;A&lt;/이름&gt;&#xD;&#xA;    &lt;KEY_x0020_값&gt;KEY1&lt;/KEY_x0020_값&gt;&#xD;&#xA;    &lt;데이터&gt;R111&lt;/데이터&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;idx&gt;2&lt;/idx&gt;&#xD;&#xA;    &lt;이름&gt;A&lt;/이름&gt;&#xD;&#xA;    &lt;KEY_x0020_값&gt;KEY1&lt;/KEY_x0020_값&gt;&#xD;&#xA;    &lt;데이터&gt;R112&lt;/데이터&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;idx&gt;3&lt;/idx&gt;&#xD;&#xA;    &lt;이름&gt;A&lt;/이름&gt;&#xD;&#xA;    &lt;KEY_x0020_값&gt;KEY1&lt;/KEY_x0020_값&gt;&#xD;&#xA;    &lt;데이터&gt;R113&lt;/데이터&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;idx&gt;4&lt;/idx&gt;&#xD;&#xA;    &lt;이름&gt;B&lt;/이름&gt;&#xD;&#xA;    &lt;KEY_x0020_값&gt;KEY1&lt;/KEY_x0020_값&gt;&#xD;&#xA;    &lt;데이터&gt;R114&lt;/데이터&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;idx&gt;5&lt;/idx&gt;&#xD;&#xA;    &lt;이름&gt;B&lt;/이름&gt;&#xD;&#xA;    &lt;KEY_x0020_값&gt;KEY2&lt;/KEY_x0020_값&gt;&#xD;&#xA;    &lt;데이터&gt;R115&lt;/데이터&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;idx&gt;6&lt;/idx&gt;&#xD;&#xA;    &lt;이름&gt;C&lt;/이름&gt;&#xD;&#xA;    &lt;KEY_x0020_값&gt;KEY2&lt;/KEY_x0020_값&gt;&#xD;&#xA;    &lt;데이터&gt;R116&lt;/데이터&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:OutputDataTable DataTable="[DT_Test]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="876.666666666667,22" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[Str_Test]" />
+    <WriteLine DisplayName="Write Line - Sample Data" sap:VirtualizedContainerService.HintSize="876.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[&quot;FIrst------------------------------&quot; + Environment.NewLine + Str_Test + Environment.NewLine + &quot;------------------------------&quot;]" />
+    <Assign DisplayName="Assign index for loop" sap:VirtualizedContainerService.HintSize="876.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[idx]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[DT_Test.rows.Count-1]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <TryCatch DisplayName="Try to Catch IndexOutOfRangeException" sap:VirtualizedContainerService.HintSize="876.666666666667,1371.33333333333" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <ui:InterruptibleWhile Condition="[idx &gt;= 0]" DisplayName="Loop For Datatable" sap:VirtualizedContainerService.HintSize="838,1133.33333333333" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+          <ui:InterruptibleWhile.Body>
+            <Sequence DisplayName="Loop" sap:VirtualizedContainerService.HintSize="801.333333333333,964" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If Condition="[DT_Test.Rows(idx).item(&quot;KEY 값&quot;).ToString = DT_Test.Rows(idx-1).item(&quot;KEY 값&quot;).ToString]" DisplayName="If &quot;KEY 값&quot; is same" sap:VirtualizedContainerService.HintSize="759.333333333333,770" sap2010:WorkflowViewState.IdRef="If_2">
+                <If.Then>
+                  <Sequence DisplayName="True" sap:VirtualizedContainerService.HintSize="613.333333333333,619.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If Condition="[DT_Test.Rows(idx).item(&quot;데이터&quot;).ToString.Contains(DT_Test.Rows(idx-1).item(&quot;데이터&quot;).ToString)]" DisplayName="If idx 행에 idx-1 행의 데이터가 있다면" sap:VirtualizedContainerService.HintSize="571.333333333333,212.666666666667" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If.Then>
+                        <Assign DisplayName="데이터를 추가하지 않고 올림" sap:VirtualizedContainerService.HintSize="262.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_8">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx-1).item("데이터")]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx).item("데이터").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Then>
+                      <If.Else>
+                        <Assign DisplayName="데이터를 추가해서 올림" sap:VirtualizedContainerService.HintSize="262.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_9">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx-1).item("데이터")]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[DT_Test.Rows(idx-1).item("데이터").ToString + "," + DT_Test.Rows(idx).item("데이터").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Else>
+                    </If>
+                    <If Condition="[DT_Test.Rows(idx).item(&quot;이름&quot;).ToString.Contains(DT_Test.Rows(idx-1).item(&quot;이름&quot;).ToString)]" DisplayName="If idx 행의 이름에 idx-1 행의 이름이 있다면" sap:VirtualizedContainerService.HintSize="571.333333333333,212.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If.Then>
+                        <Assign DisplayName="이름을 추가하지 않고 그대로 올림" sap:VirtualizedContainerService.HintSize="262.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx-1).item("이름")]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx).item("이름").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Then>
+                      <If.Else>
+                        <Assign DisplayName="이름을 합쳐서 올림" sap:VirtualizedContainerService.HintSize="262.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_5">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx-1).item("이름")]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Object">[DT_Test.Rows(idx-1).item("이름").ToString + "," + DT_Test.Rows(idx).item("이름").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Else>
+                    </If>
+                    <ui:RemoveDataRow Row="{x:Null}" DataTable="[DT_Test]" DisplayName="Remove Data Row(idx)" sap:VirtualizedContainerService.HintSize="571.333333333333,22" sap2010:WorkflowViewState.IdRef="RemoveDataRow_1" RowIndex="[idx]" />
+                  </Sequence>
+                </If.Then>
+              </If>
+              <Assign DisplayName="idx Decreasing" sap:VirtualizedContainerService.HintSize="759.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[idx]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[idx-1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ui:InterruptibleWhile.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InterruptibleWhile>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:IndexOutOfRangeException" sap:VirtualizedContainerService.HintSize="842.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:IndexOutOfRangeException">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:IndexOutOfRangeException" Name="exception" />
+            </ActivityAction.Argument>
+            <WriteLine DisplayName="Write Line : End of Loop" sap:VirtualizedContainerService.HintSize="232,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="-----Out of Index-----" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <ui:ForEachRow CurrentIndex="[idx]" DataTable="[DT_Test]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="313.333333333333,214.666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+          <ui:ForEachRow.Body>
+            <ActivityAction x:TypeArguments="sd:DataRow">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+              </ActivityAction.Argument>
+              <Assign sap:VirtualizedContainerService.HintSize="262.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_7">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[row.item("idx")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[idx+1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </ActivityAction>
+          </ui:ForEachRow.Body>
+        </ui:ForEachRow>
+      </TryCatch.Finally>
+    </TryCatch>
+    <ui:OutputDataTable DataTable="[DT_Test]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="876.666666666667,22" sap2010:WorkflowViewState.IdRef="OutputDataTable_2" Text="[Str_Test]" />
+    <WriteLine DisplayName="Write Line - Result" sap:VirtualizedContainerService.HintSize="876.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Second------------------------------&quot; + Environment.NewLine + Str_Test + Environment.NewLine + &quot;------------------------------&quot;]" />
+  </Sequence>
+</Activity>
